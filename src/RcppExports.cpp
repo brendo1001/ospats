@@ -6,46 +6,26 @@
 
 using namespace Rcpp;
 
-// rcpparma_hello_world
-arma::mat rcpparma_hello_world();
-RcppExport SEXP Ospats_rcpparma_hello_world() {
+// fastPdist2
+NumericMatrix fastPdist2(NumericMatrix Ar, NumericMatrix Br);
+RcppExport SEXP Ospats_fastPdist2(SEXP ArSEXP, SEXP BrSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    __result = Rcpp::wrap(rcpparma_hello_world());
+    Rcpp::traits::input_parameter< NumericMatrix >::type Ar(ArSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type Br(BrSEXP);
+    __result = Rcpp::wrap(fastPdist2(Ar, Br));
     return __result;
 END_RCPP
 }
-// rcpparma_outerproduct
-arma::mat rcpparma_outerproduct(const arma::colvec& x);
-RcppExport SEXP Ospats_rcpparma_outerproduct(SEXP xSEXP) {
+// fastVsum
+NumericMatrix fastVsum(NumericMatrix Ar);
+RcppExport SEXP Ospats_fastVsum(SEXP ArSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    __result = Rcpp::wrap(rcpparma_outerproduct(x));
-    return __result;
-END_RCPP
-}
-// rcpparma_innerproduct
-double rcpparma_innerproduct(const arma::colvec& x);
-RcppExport SEXP Ospats_rcpparma_innerproduct(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    __result = Rcpp::wrap(rcpparma_innerproduct(x));
-    return __result;
-END_RCPP
-}
-// rcpparma_bothproducts
-Rcpp::List rcpparma_bothproducts(const arma::colvec& x);
-RcppExport SEXP Ospats_rcpparma_bothproducts(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    __result = Rcpp::wrap(rcpparma_bothproducts(x));
+    Rcpp::traits::input_parameter< NumericMatrix >::type Ar(ArSEXP);
+    __result = Rcpp::wrap(fastVsum(Ar));
     return __result;
 END_RCPP
 }
