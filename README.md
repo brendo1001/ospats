@@ -1,0 +1,2 @@
+# ospats
+Optimal stratification
