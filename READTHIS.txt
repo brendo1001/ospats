@@ -1,0 +1,26 @@
+Some notes.
+
+Package established 19/07/16
+
+The ospats function performs optimal stratification of a gridded or mapped sampling domain 
+given predictions and associated prediction uncertainties. An easier way to describe the input is a digital
+soil map and assocaited prediciton variances. 
+
+R code was orginally interpreted from Matlab code that was i believe developed by Jaap de Gruijter and Budiman Minasny
+
+The first go of the function is exactly as is from the original matlab code.
+
+Nicolas Saby provided a variant routine where the reallocation involved a simulated annealing to better
+explore the solutions and avoid getting a solution stuck in a rut. Ideally irrespective of the starting solution
+the final solution (stratification) should always be the same or very similar. The annealing schedule seems to be a 
+good approach to do this than before where the solution was pretty much railroaded from previous allocations.
+
+The functions incorporates some neat speed ups in terms of some custom c++ code. Spent some time getting my head around 
+this.
+
+There are many things to do to get this package in working order:
+
+1. get on top of the documentation. There are many elements to this
+2. put a data set into the package
+3. Need to explore the option of whether the user can specify annealing or 'railroad' solutions. I think it
+would be useful to have both options available. 
