@@ -1,0 +1,5 @@
+useDynLib(Ospats)
+importFrom(Rcpp, evalCpp)
+exportPattern("^[[:alpha:]]+")
+
+export(ospatsF)
