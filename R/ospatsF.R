@@ -1,21 +1,29 @@
 #opstats algorithm
+#As described in de Gruijter et al. (2015) {Optimizing Stratification and Allocation for 
+#Design-Based Estimation of Spatial Means Using Predictions with Error}
+
+#What does it do:
+# Given a map (for instance a digital soil map) with prediction variance this function will derive a
+# spatial stratifcation somewhere on the spectrum between and including compact geographical stratification
+# (high uncertainty) and clusters based on the quantiles of the data (low uncertainty).
 
 ##start of function
-ospatsF<- function(data, 
-                   dRange, 
-                   nCycles, 
+ospatsF<- function(data, # input data (data frame). 4 columns [ X, Y, Pred, Var]
+                   dRange, # spatial structure of prediction variance
+                   nCycles, # Number of allocation iterations 
                    dStart, # choose between kMeans (0) or CumrootSquare(1) or external (3)
-                   ClusterStart = c() , # external for dStart == 3
-                   dMaxrun, 
-                   dRSquare, 
-                   dStrata, 
-                   initialTemperature = 1,
-                   coolingRate = 0.9999, 
-                   debug=F, 
-                   verbose=T){
+                   ClusterStart = c() , # external for dStart == 3 (Saby Input)
+                   dMaxrun, # Number of runs the algorithm will go through to find optimal allocation
+                   dRSquare, # Used for compensation of leveling
+                   dStrata, # Number of strata
+                   initialTemperature = 1, #simulated annealing parameter
+                   coolingRate = 0.9999,  # simulated annealing parameter 
+                   debug=F, # Useful during development for troubleshooting issues
+                   verbose=T){  # Prints messages during the running of function
   
   
-  ##################Embedded Function 1 ##############################################################
+  ##################Embedded Function##############################################################
+  #For clustering the predictions based on quantiles of the data
   cumsqfDel<- function(z, nclass, ns){ 
     # calculate the distribution based on nclass
     z2<- cbind(seq(1,length(z),by=1), z)
@@ -83,21 +91,22 @@ ospatsF<- function(data,
     return(retval)}
   ###################################################################################################################
 
+  
   # Define structure for storing time series of criterion
   Eall<-NULL
   # set initial temperature
   Temp <- initialTemperature
   
-  x<- data[,1]
-  y<- data[,2]
-  z<- data[,3]
-  s2<-data[,4]
+  x<- data[,1] #X
+  y<- data[,2] #Y
+  z<- data[,3] # prediction
+  s2<-data[,4] # prediction variance
   s2s<- s2
   n = length(x)
   d20<- 0 # stroring distance in case of re-run
 
 print("-----OSPATS INITIALISATION------")
-# generate initial solution
+
 # generate initial solution
 if (dStart == 0)  #use kmeans of coordinates
 {k1<- kmeans(x= cbind(x,y), centers= dStrata, nstart=10, iter.max = 500)
@@ -105,9 +114,10 @@ if (dStart == 0)  #use kmeans of coordinates
 if (dStart == 1)  #use Cum-sqrt-f
 {nclass<-  100
  strat0<- cumsqfDel(z= z, nclass= nclass, ns= dStrata)[[1]]}
-if (dStart == 3)  #use external solution
+if (dStart == 3)  #use external solution (saby)
 { strat0<- as.matrix(ClusterStart) }
  
+
 #                            INITIATION
 # Vectorised calculation of distance matrix, without loop
 if(d20==0){

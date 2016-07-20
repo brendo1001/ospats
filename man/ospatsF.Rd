@@ -1,10 +1,12 @@
 \name{ospatsF}
 \docType{methods}
 \alias{ospatsF}
-\title{Disaggregating and harmonising soil map units through resampled classification trees}
-\description{This function, together with companion function \code{dsmartR} implements the the dsmart (Disaggregating and harmonising soil map units through resampled classification trees) algorithm as described in Odgers et al. (2014). This is the workhorse function that involves multiple resampling, C5 decision tree model fitting, and subsequent mapping in order to realize potential candidate soil classes within aggregated soil mapping units.}
+\title{Optimizing Stratification and Allocation for Design-Based Estimation of Spatial Means Using Predictions with Error.}
 
-\usage{ospatsF(data= data, dRange= dRange, nCycles= nCycles, dStart= 1, dMaxrun=1, dRSquare=0.5, dStrata=4, debug=FALSE, verbose=TRUE)}
+\description{Need to populate this}
+
+\usage{ospatsF(data= data, dRange= dRange, nCycles= nCycles, dStart= 1, ClusterStart= NULL, dMaxrun=1, dRSquare=0.5, dStrata=4, debug=FALSE, verbose=TRUE)}
+
 \arguments{
   \item{covariates}{\code{RasterStack}; A stack of grids or rasters that are surrogates for environmental variables to both guide the C5 model fitting and provide the necessary environmental data for the spatial mapping of predicted soil classes.} 
   \item{polygons}{\code{SpatialPolygonsDataFrame}; See \code{data(dsT_polygons)} for an example of requirements. Each polygon needs to have the following necessary attribute data: A numeric unique map unit identifier, a character map unit name or code. And coupled columns of map unit classes and their respective proportions.}     
@@ -21,14 +23,15 @@
    \item{\code{rasters}}{folder; This folder contains the rasters or soil class map created from each C5 model realisation and are labelled sequentially. This folder also contains the file \code{classLookupTable.txt} which is a lookup table to link unique numeric labels to soil class character names.}  
 }}
 
-\note{The \code{dsmart} function is a companion function to \code{dsmartR}. Although this function can be run in parallel mode, increasing the number of realisations can drastically result in longer computation times.}
+\note{No notes at this stage}
 
-\author{Nathan Odgers and Brendan Malone}
+\author{Brendan Malone and Nicolas Saby}
 \references{
 \itemize{
-\item Odgers, N.P., Sun, W., McBratney, A.B., Minasny, B., Clifford, D., (2014) \href{http://dx.doi.org/10.1016/j.geoderma.2013.09.024}{Disaggregating and harmonising soil map units through resampled classification trees}. Geoderma, 214-215: 91-100.
-\item Odgers, N.P., Sun, McBratney, A.B., Minasny, B., (2015) \href{http://dx.doi.org/10.1016/j.geoderma.2014.09.009}{Digital soil property mapping and uncertainty estimation using soil class probability rasters}. Geoderma, 237:238 190-198.
+\item de Gruijter, J.J., Minasny, B., McBratney, A.B., (2015) \href{http://dx.doi.org/10.1093/jssam/smu024}{Optimizing Stratification and Allocation for Design-Based Estimation of Spatial Means Using Predictions with Error}. Journal of Survey Statistics and Methodology 3(1), 19-42. 
+\item de Gruijter, J.J., McBratney, A.B., Minasny, B., Wheeler, I., Malone, B.P., Stockmann, U., (2016) \href{http://dx.doi.org/10.1016/j.geoderma.2015.11.010}{Farm-scale soil carbon auditing}. Geoderma 265, 120-130.
 }}
+
 
 
 \examples{
