@@ -24,3 +24,9 @@ There are many things to do to get this package in working order:
 2. put a data set into the package
 3. Need to explore the option of whether the user can specify annealing or 'railroad' solutions. I think it
 would be useful to have both options available. 
+
+
+###27/07/16 (malone)
+- Getting on top of the documentation. Still need to touch up the ospats one a bit more
+- included data into the package, but need to write some documentation for it.
+- should also include the cum sq function ino the package to (and with associated manual)
