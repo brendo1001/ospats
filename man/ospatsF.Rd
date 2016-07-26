@@ -20,7 +20,7 @@
   \item{verbose}{\code{logical}; generate additional outputs while function is running.}
 }
 
-\value{NEED TO FILL THIS IN BETTER}. 
+\value{NEED TO FILL THIS IN BETTER
 \describe{
    \item{\code{dsmartModels.Rdata}}{This \code{R} object contains in a list, the C5 model object from each realisation of the algorithm.}
    \item{\code{models}}{folder; This folder contains the summary output of each C5 model fitted from each realisation of the algorithm. }
