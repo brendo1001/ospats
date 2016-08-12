@@ -103,7 +103,7 @@ ospatsF<- function(data, # input data (data frame). 4 columns [ X, Y, Pred, Var]
   s2<-data[,4] # prediction variance
   s2s<- s2
   n = length(x)
-  d20<- 0 # stroring distance in case of re-run
+  d20<- 0 # storing distance in case of re-run
 
 print("-----OSPATS INITIALISATION------")
 
@@ -305,7 +305,7 @@ for (run in 1:dMaxrun){
     StratBest[,1]<- stratcy}}
 d1<- cbind(data,StratBest)
 names(d1)[ncol(d1)]<- "ospats_strata"
-retval<- list(ObarBest, d1 , Eall)
+retval<- list(objective = ObarBest, stratFrame = d1 , annealOut= Eall, covMat= d2, sumSq= Sd2)
 return(retval)
 }
   
