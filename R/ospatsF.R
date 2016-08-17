@@ -93,6 +93,7 @@ ospatsF<- function(data, # input data (data frame). 4 columns [ X, Y, Pred, Var]
 
   
   # Define structure for storing time series of criterion
+  params<- c(dRange,nCycles, dStart,dMaxrun, dRSquare,dStrata,initialTemperature,coolingRate  )
   Eall<-NULL
   # set initial temperature
   Temp <- initialTemperature
@@ -305,7 +306,7 @@ for (run in 1:dMaxrun){
     StratBest[,1]<- stratcy}}
 d1<- cbind(data,StratBest)
 names(d1)[ncol(d1)]<- "ospats_strata"
-retval<- list(objective = ObarBest, stratFrame = d1 , annealOut= Eall, covMat= d2, sumSq= Sd2)
+retval<- list(objective = ObarBest, stratFrame = d1 , annealOut= Eall, covMat= d2, sumSq= Sd2, ospatsParams= params)
 return(retval)
 }
   

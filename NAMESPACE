@@ -1,5 +1,12 @@
 useDynLib(Ospats)
 importFrom(Rcpp, evalCpp)
+import("rgdal")
+importFrom("parallel", makeCluster, stopCluster)
+importFrom("doParallel", registerDoParallel)
+importFrom("foreach", foreach)
+importFrom("raster", raster, writeStart, getValues, cellFromRow, xyFromCell, writeValues )
+importFrom("utils", txtProgressBar )
 exportPattern("^[[:alpha:]]+")
 
 export(ospatsF)
+export(ospats_allocate)

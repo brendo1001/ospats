@@ -3,9 +3,9 @@
 \alias{ospatsF}
 \title{Optimizing Stratification and Allocation for Design-Based Estimation of Spatial Means Using Predictions with Error.}
 
-\description{Need to populate this}
+\description{Given some information (map) of a target variable with associated error variance, Ospats is able to produce stratifications that represent transitions between the ‘knowing nothing about the target variable’ (high mapping uncertainty) and ‘knowing a lot about the target variable’ (low mapping uncertainty) situations. The theoretical and mathematical explanation of Ospats is described in detail in de Gruijter et al (2015). Stratification is optimised by minimising the expected sampling variance. The objective function O is minimized by an iterative re-allocation algorithm similar to those for k-means, except that here mutual distances are taken between grid points instead of distances between grid points and centroids.}
 
-\usage{ospatsF(data= data, dRange= dRange, nCycles= nCycles, dStart= 1, ClusterStart= NULL, dMaxrun=1, dRSquare=0.5, dStrata=4, debug=FALSE, verbose=TRUE)}
+\usage{ospatsF(data= data, dRange= dRange, nCycles= nCycles, dStart= 1, ClusterStart= NULL, dMaxrun=1, dRSquare=0.5, dStrata=4, initialTemperature = 1, coolingRate = 0.9999, debug=FALSE, verbose=TRUE)}
 
 \arguments{
   \item{data}{\code{data.frame}; Needs to be 4 columns. Column 1 and 2 are the coorodinates. Column 3 are the predictions. Column 4 are the prediction variances.}
@@ -16,15 +16,20 @@
    \item{dMaxrun}{\code{numeric}; Number of iterations one want to perfrom the allocation cycles. The default is set to 1.}
   \item{dRSquare}{\code{numeric}; Goodness of fit of the model that created the input prediction map. Value is used for preferencing allocations.}
   \item{dStrata}{\code{numeric}; number of strata one wants to create.}
+  \item{initialTemperature}{\code{numeric}; Annealing parameter.}
+  \item{coolingRate}{\code{numeric}; Annealing parameter. Determine the rate of cooling.}
   \item{debug}{\code{logical}; function troubleshooting option.}
   \item{verbose}{\code{logical}; generate additional outputs while function is running.}
 }
 
-\value{NEED TO FILL THIS IN BETTER
+\value{This function returns a list containing a number of elements. 
 \describe{
-   \item{\code{dsmartModels.Rdata}}{This \code{R} object contains in a list, the C5 model object from each realisation of the algorithm.}
-   \item{\code{models}}{folder; This folder contains the summary output of each C5 model fitted from each realisation of the algorithm. }
-   \item{\code{rasters}}{folder; This folder contains the rasters or soil class map created from each C5 model realisation and are labelled sequentially. This folder also contains the file \code{classLookupTable.txt} which is a lookup table to link unique numeric labels to soil class character names.}  
+   \item{objective}{The is the value of the objective function. This is similar to a sampling variance of which ospats tries to minimise.}
+   \item{stratFrame}{This is a dataframe of 5 columns: Every row is an instance of coordinates (x and Y), prediction, error variance and alocated strata number.}
+   \item{annealOut}{SOme diognostic information regarding the annealling schedule.}  
+   \item{covMat}{Covariance matrix of input data}  
+   \item{sumSq}{Vector os strata sums of squares}  
+   \item{ospatsParams}{Vector of the ospats auguments.}  
 }}
 
 \note{A near future update of this function will be the ability to use rasters as the input data. In theory the solution (stratification) should be the same irrespective of the starting stratification. It was noted in a very early development of this function that this would not always eventaute for every situation. The process of converging to a final solution was very much railroaded. The implementation of this function however is a little different in that simulated annealing allows alternate realisations to be accepted along the way to minimisaion of the objective function. This new features avoids the railroading issue. maybe in future function development, it may be optional to select the annealing routine or not. }
@@ -39,22 +44,42 @@
 
 
 \examples{
-#library(dsmart)
+
+####NOT RUN
+#library(Ospats)
 #library(raster)
+#library(rasterVis)
 
-#load the relevent data
+#Get some data
+#data(nowley_Cstock)
 
-#Covariates
-#data(dsT_covariates)
 
-#Polygons
-#data(dsT_polygons)
+##ospats parameters
+#tester_1<- ospatsF(data = nowley_Cstock, # input data (data frame). 4 columns [ X, Y, Pred, Var]
+#                   dRange = 4000, # spatial structure of prediction variance
+#                   nCycles = 400, # Number of allocation iterations 
+#                   dStart = 1, # choose between kMeans (0) or CumrootSquare(1) or external (3)
+#                   ClusterStart = c() , # external for dStart == 3 (Saby Input)
+#                   dMaxrun = 1, # Number of runs the algorithm will go through to find optimal allocation
+#                   dRSquare = 0.42, # Used for compensation of leveling
+#                   dStrata = 5, # Number of strata
+#                   initialTemperature = 1, #simulated annealing parameter
+#                   coolingRate = 0.95,  # simulated annealing parameter 
+#                   debug=F, # Useful during development for troubleshooting issues
+#                   verbose=T) # Prints messages during the running of function
 
-#Map unit compositions
-#data(dsT_composition)
+#str(tester_1)
 
-#Run dsmart (with 15 samples per polygon, 5 C5 model realisations, using 1 compute node)
-#dsmart(covariates = dsT_covariates, polygons = dsT_polygons, composition = dsT_composition, n=15, reals = 5, cpus=1)
+
+#plot ospats stratification
+#r1<- rasterFromXYZ(tester_1[[2]][,c(1,2,5)])
+#map.c <- as.factor(r1)
+#rat <- levels(map.c)[[1]]
+#rat[["strata"]] <- c("HVT_001", "HVT_002", "HVT_003", "HVT_004", "HVT_005")
+#levels(map.c) <- rat
+#area_colors <- c("#FF0000", "#38A800", "#73DFFF", "#FFEBAF", "#800000")
+#levelplot(map.c, col.regions = area_colors, xlab = "", ylab = "", main= "Ospats Strata")
+###
 
 }
 \keyword{methods}

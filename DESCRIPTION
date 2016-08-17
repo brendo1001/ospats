@@ -7,5 +7,5 @@ Author: Brendan Malone, Nicolas Saby
 Maintainer: Brendan Malone <brendan.malone@sydney.edu.au>
 Description: Optimal stratifcation of sampling domain given gridded map predictions and associated prediction uncertaintes.
 License: MIT
-Imports: Rcpp (>= 0.12.5)
+Imports: Rcpp (>= 0.12.5), doParallel, parallel, utils, foreach, rgdal
 LinkingTo: Rcpp, RcppArmadillo
