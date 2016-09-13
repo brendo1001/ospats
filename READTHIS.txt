@@ -30,3 +30,16 @@ would be useful to have both options available.
 - Getting on top of the documentation. Still need to touch up the ospats one a bit more
 - included data into the package, but need to write some documentation for it.
 - should also include the cum sq function ino the package to (and with associated manual)
+
+###17/08/16
+-Added the ospats allocation function. Helpful bit of script to allocate addtional grid points to strata.
+-Tidied up a fair bit of the documentation and added new documentation
+-Package is in working order with sufficent docs
+
+###13/09/16
+- Added Jose Padarian as a contributor
+- push some changes that were made a while back.
+- These were in relation to the compiling of the C functions i think
+
+
+
