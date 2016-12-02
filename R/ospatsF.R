@@ -109,8 +109,9 @@ ospatsF<- function(data, # input data (data frame). 4 columns [ X, Y, Pred, Var]
 print("-----OSPATS INITIALISATION------")
 
 # generate initial solution
+print("Initial Solution")
 if (dStart == 0)  #use kmeans of coordinates
-{k1<- kmeans(x= cbind(x,y), centers= dStrata, nstart=10, iter.max = 500)
+{k1<- kmeans(x= cbind(x,y), centers= dStrata, nstart=10, iter.max = 500, algorithm = "MacQueen")
  strat0<- as.matrix(k1$cluster)}
 if (dStart == 1)  #use Cum-sqrt-f
 {nclass<-  100
@@ -121,6 +122,7 @@ if (dStart == 3)  #use external solution (saby)
 
 #                            INITIATION
 # Vectorised calculation of distance matrix, without loop
+print("distance matrix")
 if(d20==0){
 # calculate distance matrix
 xy = cbind(x,y)
@@ -137,6 +139,7 @@ S2<- fastVsum(Ar = as.matrix(s2))
 
 
 # calculate matrix of maximum of covariance
+print("matrix of maximum covariance")
 Cov_max <-  0.5 *S2
 Cov<-  Cov_max * exp(-3*Lag/dRange)
 d2<-  Z2 + S2 -2*Cov 
@@ -158,6 +161,8 @@ ObjNoStr<-  sqrt(TOTd2)
 ObarH1<-  ObjNoStr/n
 
 # Calculate sums of d2's within strata (Sd2) and contributions of strata to Obj (cbObj).
+print("D2 sum matrix")
+d2[which((is.na(d2)))]<- 0 ## Change NaNs to 0 (02/12/16)
 Sd2<- matrix(0, nrow=1, ncol=dStrata)
 for (strat in 1:dStrata){
   Sd2[1,strat]<-  0
@@ -167,7 +172,7 @@ for (strat in 1:dStrata){
         if (strat0[j,1] == strat)
         {Sd2[1,strat]<-  Sd2[1,strat]+d2[i,j]}}}}}
 gc()
-
+if (debug==TRUE){print(Sd2)}
 Sd2_init = Sd2;
 
 cbObj<- sqrt(Sd2)

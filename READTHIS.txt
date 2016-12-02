@@ -42,4 +42,19 @@ would be useful to have both options available.
 - These were in relation to the compiling of the C functions i think
 
 
+###02/12/2016
+Nicolas was detecting an error when running the french data.
+I tracked it down to the d2 variable which is the matrix of covariance. 
+Was getting a few sneaky NaN values cropping up in the matrix.
+Because they were minor, these were changed to 0 values.
+Function seems to be working again 
+
+#I think i woud like to pull out the starting solution estimate out of the ospats function.
+
+
+
+
+
+
+
 

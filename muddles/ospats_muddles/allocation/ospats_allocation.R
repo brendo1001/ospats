@@ -1,6 +1,6 @@
 ##Stratifcation Allocation
 #Initial muddles
-library(raster)
+library(raster);library(Ospats);library(parallel);library(doParallel)
 library("rasterVis", lib.loc="~/R/win-library/3.2")
 
 setwd("I:/rcodes/opspats/allocation")
@@ -48,6 +48,7 @@ levelplot(map.c, col.regions = area_colors, xlab = "", ylab = "")
 
 #####ALLOCATION
 #file to do allocation on
+##small subset of the exisitng data but a much finer resolution
 datA<- read.table("Nowley2014_sub.txt", header = T,sep=",")
 names(datA)<- c("x", "y", "pred", "s2")
 datA$s2<- datA$s2^2 *2
@@ -60,7 +61,14 @@ stacks
 #####################################################
 
 temp1<- ospats_allocate(grids = stacks , ospat.obj= tester_1, cores = 4)
+plot(temp1[[1]])
 
+
+
+
+
+
+##OSPATS ALLOCATION FUNCTION
 ospats_allocate<- function(grids = stacks , ospat.obj= tester_1, cores = 4){
 
 #inputs from ospats
