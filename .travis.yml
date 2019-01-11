@@ -1,19 +1,9 @@
-# Sample .travis.yml for R projects
-
 language: r
-warnings_are_errors: true
 sudo: required
+dist: trusty
 
-env:
- global:
-   - CRAN: http://cran.rstudio.com
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
-    
-apt:
+addons:
+  apt:
     packages:
       - libgdal-dev
       - libproj-dev
