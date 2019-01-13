@@ -2,10 +2,10 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 fastPdist2 <- function(Ar, Br) {
-    .Call('Ospats_fastPdist2', PACKAGE = 'Ospats', Ar, Br)
+    .Call('_Ospats_fastPdist2', PACKAGE = 'Ospats', Ar, Br)
 }
 
 fastVsum <- function(Ar) {
-    .Call('Ospats_fastVsum', PACKAGE = 'Ospats', Ar)
+    .Call('_Ospats_fastVsum', PACKAGE = 'Ospats', Ar)
 }
 

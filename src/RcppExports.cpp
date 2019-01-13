@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // fastPdist2
 NumericMatrix fastPdist2(NumericMatrix Ar, NumericMatrix Br);
-RcppExport SEXP Ospats_fastPdist2(SEXP ArSEXP, SEXP BrSEXP) {
+RcppExport SEXP _Ospats_fastPdist2(SEXP ArSEXP, SEXP BrSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -20,7 +20,7 @@ END_RCPP
 }
 // fastVsum
 NumericMatrix fastVsum(NumericMatrix Ar);
-RcppExport SEXP Ospats_fastVsum(SEXP ArSEXP) {
+RcppExport SEXP _Ospats_fastVsum(SEXP ArSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -28,4 +28,15 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(fastVsum(Ar));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_Ospats_fastPdist2", (DL_FUNC) &_Ospats_fastPdist2, 2},
+    {"_Ospats_fastVsum", (DL_FUNC) &_Ospats_fastVsum, 1},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_Ospats(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

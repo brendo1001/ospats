@@ -19,7 +19,7 @@
 
 
 
-ospats_allocate<- function(grids = stacks , ospat.obj= tester_1, cores = 4){
+ospats_allocate<- function(grids = NULL , ospat.obj= NULL, cores = 1){
   
   #inputs from ospats
   tester_1<- ospat.obj

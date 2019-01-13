@@ -8,18 +8,18 @@
 # (high uncertainty) and clusters based on the quantiles of the data (low uncertainty).
 
 ##start of function
-ospatsF<- function(data, # input data (data frame). 4 columns [ X, Y, Pred, Var]
-                   dRange, # spatial structure of prediction variance
-                   nCycles, # Number of allocation iterations 
-                   dStart, # choose between kMeans (0) or CumrootSquare(1) or external (3)
-                   ClusterStart = c() , # external for dStart == 3 (Saby Input)
-                   dMaxrun, # Number of runs the algorithm will go through to find optimal allocation
-                   dRSquare, # Used for compensation of leveling
-                   dStrata, # Number of strata
-                   initialTemperature = 1, #simulated annealing parameter
-                   coolingRate = 0.9999,  # simulated annealing parameter 
-                   debug=F, # Useful during development for troubleshooting issues
-                   verbose=T){  # Prints messages during the running of function
+ospatsF<- function(data = NULL, # input data (data frame). 4 columns [ X, Y, Pred, Var]
+                   dRange = NULL, # spatial structure of prediction variance
+                   nCycles = NULL, # Number of allocation iterations 
+                   dStart = NULL, # choose between kMeans (0) or CumrootSquare(1) or external (3)
+                   ClusterStart = NULL , # external for dStart == 3 (Saby Input)
+                   dMaxrun = NULL, # Number of runs the algorithm will go through to find optimal allocation
+                   dRSquare = NULL, # Used for compensation of leveling
+                   dStrata = NULL, # Number of strata
+                   initialTemperature = NULL, #simulated annealing parameter
+                   coolingRate = NULL,  # simulated annealing parameter 
+                   debug = FALSE, # Useful during development for troubleshooting issues
+                   verbose = TRUE){  # Prints messages during the running of function
   
   
   ##################Embedded Function##############################################################

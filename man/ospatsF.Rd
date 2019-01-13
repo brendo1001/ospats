@@ -1,18 +1,17 @@
 \name{ospatsF}
 \docType{methods}
-\alias{ospatsF}
 \title{Optimizing Stratification and Allocation for Design-Based Estimation of Spatial Means Using Predictions with Error.}
 
 \description{Given some information (map) of a target variable with associated error variance, Ospats is able to produce stratifications that represent transitions between the ‘knowing nothing about the target variable’ (high mapping uncertainty) and ‘knowing a lot about the target variable’ (low mapping uncertainty) situations. The theoretical and mathematical explanation of Ospats is described in detail in de Gruijter et al (2015). Stratification is optimised by minimising the expected sampling variance. The objective function O is minimized by an iterative re-allocation algorithm similar to those for k-means, except that here mutual distances are taken between grid points instead of distances between grid points and centroids.}
 
-\usage{ospatsF(data= data, dRange= dRange, nCycles= nCycles, dStart= 1, ClusterStart= NULL, dMaxrun=1, dRSquare=0.5, dStrata=4, initialTemperature = 1, coolingRate = 0.9999, debug=FALSE, verbose=TRUE)}
+\usage{ospatsF(data= NULL, dRange= NULL, nCycles= NULL, dStart= NULL, ClusterStart= NULL, dMaxrun=NULL, dRSquare=NULL, dStrata=NULL, initialTemperature = NULL, coolingRate = NULL, debug=FALSE, verbose=TRUE)}
 
 \arguments{
   \item{data}{\code{data.frame}; Needs to be 4 columns. Column 1 and 2 are the coorodinates. Column 3 are the predictions. Column 4 are the prediction variances.}
   \item{dRange}{\code{numeric}; A distance value of the autocorrelation of prediction errors.}     
   \item{nCycles}{\code{numeric}; The number of allowable allocation cycles in order to minimise the objective function.}
   \item{dStart}{\code{numeric}; Starting stratifcation. 0 for strata based on clustering of coordinates, or 1 for clustering based on quantiles of mapped variable. }
-  \item{ClusterStart}{\code{!!!}; Not sure how to specify paramter yet. It is included to allow some to be able to specify their own starting stratifcation instead of using ones specified for \code{dStart}.}
+  \item{ClusterStart}{\code{numeric}; Not sure how to specify paramter yet. It is included to allow some to be able to specify their own starting stratifcation instead of using ones specified for \code{dStart}.}
    \item{dMaxrun}{\code{numeric}; Number of iterations one want to perfrom the allocation cycles. The default is set to 1.}
   \item{dRSquare}{\code{numeric}; Goodness of fit of the model that created the input prediction map. Value is used for preferencing allocations.}
   \item{dStrata}{\code{numeric}; number of strata one wants to create.}

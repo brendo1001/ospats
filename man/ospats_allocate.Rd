@@ -1,11 +1,10 @@
 \name{ospats allocation}
 \docType{methods}
-\alias{ospats allocation}
 \title{Allocation of ospats strata to further additional grid points.}
 
 \description{These words are more-or-less verbatim from Jaap de Gruijter via personal communication. We assume that a grid of N points has been divided into H strata by Ospats \code{ospatsF}. We assume further that additional grid points (not included in the stratifcation process) are to be allocated to the existing Ospats strata. The same data are assumed to be available for the additional grid points as for the original points, i.e. predictions and prediction error variances. This function optimally allocates these additional data to the ospats strata. The principle of the proposed allocation method is to assign each additional grid point in turn to one of the strata while minimizing the same objective function O as was used to create the stratifcation. This means that, for the allocation of point xt, we have to fnd the stratum Sh of which the increase of its contribution to O by adding xt to Sh is minimal.}
 
-\usage{ospats_allocate(grids, ospat.obj, cores = 1)}
+\usage{ospats_allocate(grids = NULL, ospat.obj = NULL, cores = 1)}
 
 \arguments{
   \item{grids}{\code{raster stack}; Map of predictions and map of associated error variance stacked together.}
