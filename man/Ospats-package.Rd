@@ -9,7 +9,7 @@
 \packageDescription{Ospats}
 }
 \details{
-Optimization of spatial stratification and allocation for stratified random sampling of points in the plane. Theory and discussion in both de Gruijter papers reference below.
+Optimization of spatial stratification and allocation for stratified random sampling of points in the plane. Theory and discussion in both de Gruijter papers referenced below.
 }
 
 \author{

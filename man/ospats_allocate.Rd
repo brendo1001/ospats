@@ -28,7 +28,6 @@
 
 \examples{
 ####NOT RUN
-#library(Ospats)
 #library(raster)
 #library(rasterVis)
 #library(foreach)
