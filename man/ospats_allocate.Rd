@@ -72,10 +72,10 @@
 
 ###
 #rasterise data
-pred.r<- rasterFromXYZ(nowley_Cstock[,c(1,2,3)])
-s2.r<- rasterFromXYZ(nowley_Cstock[,c(1,2,4)])
-stacks<- stack(pred.r, s2.r)
-stacks
+#pred.r<- rasterFromXYZ(nowley_Cstock[,c(1,2,3)])
+#s2.r<- rasterFromXYZ(nowley_Cstock[,c(1,2,4)])
+#stacks<- stack(pred.r, s2.r)
+#stacks
 #####################################################
 
 ##run allocate function on 4 compute cores
