@@ -46,7 +46,6 @@
 \examples{
 
 ####NOT RUN
-#library(Ospats)
 #library(raster)
 #library(rasterVis)
 

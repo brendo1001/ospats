@@ -15,11 +15,13 @@
 \item de Gruijter, J.J., McBratney, A.B., Minasny, B., Wheeler, I., Malone, B.P., Stockmann, U., (2016) \href{http://dx.doi.org/10.1016/j.geoderma.2015.11.010}{Farm-scale soil carbon auditing}. Geoderma 265, 120-130.}}
 
 \examples{
-library(ospats)
-data(nowley_Cstock)
-str(nowley_Cstock)
+
 
 ###Not Run
+#library(ospats)
+#data(nowley_Cstock)
+#str(nowley_Cstock)
+
 #library(raster)
 #prediction
 #p.map<- rasterFromXYZ(nowley_Cstock[,c(1:3)])
